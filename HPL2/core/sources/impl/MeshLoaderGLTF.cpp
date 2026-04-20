@@ -75,7 +75,7 @@ namespace hpl {
 			}
 		}
 
-		Error("No cached mesh '%s' found for glTF asset '%s'. Generate .msh data before loading glTF mesh files.",
+		Error("No cached mesh '%s' found for glTF asset '%s'. Generate the cache first (for example with the MshConverter tool) before loading glTF mesh files.",
 			cString::To8Char(sMSHFile).c_str(), cString::To8Char(asFile).c_str());
 		return NULL;
 	}
@@ -106,7 +106,7 @@ namespace hpl {
 			}
 		}
 
-		Error("No cached animation '%s' found for glTF animation '%s'. Generate .anm data before loading glTF animations.",
+		Error("No cached animation '%s' found for glTF animation '%s'. Generate the cache first (for example with the MshConverter tool) before loading glTF animations.",
 			cString::To8Char(sANMFile).c_str(), cString::To8Char(asFile).c_str());
 		return NULL;
 	}
