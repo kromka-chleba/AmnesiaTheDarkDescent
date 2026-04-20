@@ -148,6 +148,7 @@ file(GLOB impl_sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
     sources/impl/LowLevelSoundOpenAL.cpp
     sources/impl/OpenAL*
     # mesh loader
+    sources/impl/MeshLoaderGLTF.cpp
     sources/impl/MeshLoaderCollada.cpp
     sources/impl/MeshLoaderColladaHelpers.cpp
     sources/impl/MeshLoaderColladaLoader.cpp
@@ -364,4 +365,3 @@ ENDFUNCTION()
 
 add_subdirectory(../tests tests)
 add_subdirectory(../tools tools)
-

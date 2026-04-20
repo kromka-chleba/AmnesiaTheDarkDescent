@@ -1,6 +1,8 @@
 Amnesia: The Dark Descent Source Code
 =======================
 
+glTF assets (`.gltf`, `.glb`, `.gltf_anim`) are supported through cached runtime data (`.msh`, `.anm`) in the same path and with the same basename.
+
 FBX support is optional and disabled by default (`HPL2_USE_FBX=OFF`) so the project can be configured without the proprietary Autodesk FBX SDK.
 
 If you want FBX import support, enable `HPL2_USE_FBX=ON` and provide FBX SDK 2012 (`fbxsdk-2012.2-static`) in the dependency library path.

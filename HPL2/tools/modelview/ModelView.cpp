@@ -871,7 +871,7 @@ public:
 
 		///////////////////
 		// Dae files
-		if(sExt == "dae" || sExt == "dae_anim" || sExt == "msh" || sExt == "fbx")
+		if(sExt == "gltf" || sExt == "glb" || sExt == "gltf_anim" || sExt == "dae" || sExt == "dae_anim" || sExt == "msh" || sExt == "fbx")
 		{
 			pMesh = gpEngine->GetResources()->GetMeshManager()->CreateMesh(asFileName);
 			if(pMesh==NULL) FatalError("Could not load '%s'\n", asFileName.c_str());
@@ -1643,8 +1643,10 @@ public:
 		mvPickedFiles.clear();
 		cGuiSet *pSet = gpSimpleCamera->GetSet();
 		cGuiPopUpFilePicker* pPicker = pSet->CreatePopUpLoadFilePicker(mvPickedFiles,false,msCurrentFilePath,false, this, kGuiCallback(LoadModelFromFilePicker));
-		int lCat = pPicker->AddCategory(_W("Models"),_W("*.dae"));
+		int lCat = pPicker->AddCategory(_W("Models"),_W("*.gltf"));
+		pPicker->AddFilter(lCat,_W("*.glb"));
 		pPicker->AddFilter(lCat,_W("*.ent"));
+		pPicker->AddFilter(lCat,_W("*.dae"));
 		pPicker->AddFilter(lCat,_W("*.fbx"));
 
 		return true;
@@ -1914,7 +1916,10 @@ public:
 		mvPickedFiles.clear();
 		cGuiSet *pSet = gpSimpleCamera->GetSet();
 		cGuiPopUpFilePicker* pPicker = pSet->CreatePopUpLoadFilePicker(mvPickedFiles,false,msCurrentFilePath,false, this, kGuiCallback(LoadAnimationFromFilePicker));
-		int lCat = pPicker->AddCategory(_W("Animation"),_W("*.dae"));
+		int lCat = pPicker->AddCategory(_W("Animation"),_W("*.gltf_anim"));
+		pPicker->AddFilter(lCat,_W("*.gltf"));
+		pPicker->AddFilter(lCat,_W("*.glb"));
+		pPicker->AddFilter(lCat,_W("*.dae"));
 		pPicker->AddFilter(lCat,_W("*.dae_anim"));
 		pPicker->AddFilter(lCat,_W("*.fbx"));
 
