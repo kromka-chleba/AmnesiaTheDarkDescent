@@ -39,6 +39,7 @@ ELSEIF(LINUX)
 ENDIF()
 
 OPTION(USE_SDL2 "Use SDL2 instead of SDL1.2" ON)
+OPTION(HPL2_USE_FBX "Enable FBX mesh loader support (requires Autodesk FBX SDK 2012)" OFF)
 
 add_subdirectory(../dependencies/OALWrapper OALWrapper)
 
@@ -151,8 +152,13 @@ file(GLOB impl_sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
     sources/impl/MeshLoaderColladaHelpers.cpp
     sources/impl/MeshLoaderColladaLoader.cpp
     sources/impl/MeshLoaderMSH.cpp
-    sources/impl/MeshLoaderFBX.cpp
 )
+
+if(HPL2_USE_FBX)
+    list(APPEND impl_sources
+        sources/impl/MeshLoaderFBX.cpp
+    )
+endif()
 
 IF(APPLE)
     LIST(APPEND impl_sources
@@ -239,13 +245,19 @@ source_group("Platform" REGULAR_EXPRESSION "\\/impl\\/Platform.+")
 
 FindPrebuiltLibrary(NEWTON_LIBRARY Newton)
 FindPrebuiltLibrary(ANGELSCRIPT_LIBRARY angelscript)
-FindPrebuiltLibrary(FBX_LIBRARY fbxsdk-2012.2-static)
 FindPrebuiltLibrary(GLEW_LIBRARY GLEW)
 FindPrebuiltLibrary(THEORA_LIBRARY theora)
 FindPrebuiltLibrary(DEVIL_LIBRARY IL)
 
+if(HPL2_USE_FBX)
+    FindPrebuiltLibrary(FBX_LIBRARY fbxsdk-2012.2-static)
+endif()
+
 find_package(OpenGL)
-mark_as_advanced(NEWTON_LIBRARY ANGELSCRIPT_LIBRARY FBX_LIBRARY GLEW_LIBRARY THEORA_LIBRARY DEVIL_LIBRARY)
+mark_as_advanced(NEWTON_LIBRARY ANGELSCRIPT_LIBRARY GLEW_LIBRARY THEORA_LIBRARY DEVIL_LIBRARY)
+if(HPL2_USE_FBX)
+    mark_as_advanced(FBX_LIBRARY)
+endif()
 
 # setup HPL2 compile target
 
@@ -261,6 +273,7 @@ target_include_directories(HPL2
 
 target_compile_definitions(HPL2
     ${HPL2_DEFINES}
+    PUBLIC $<$<BOOL:${HPL2_USE_FBX}>:HPL2_USE_FBX>
 )
 
 if(LINUX)
@@ -289,9 +302,14 @@ target_link_libraries(HPL2
     ${THEORA_LIBRARY}
     ${DEVIL_LIBRARY}
     z
-    ${FBX_LIBRARY}
     ${PLATFORM_LIBS}
 )
+
+if(HPL2_USE_FBX)
+    target_link_libraries(HPL2
+        ${FBX_LIBRARY}
+    )
+endif()
 
 
 if(APPLE)   
@@ -346,5 +364,4 @@ ENDFUNCTION()
 
 add_subdirectory(../tests tests)
 add_subdirectory(../tools tools)
-
 
