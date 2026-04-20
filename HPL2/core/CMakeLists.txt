@@ -39,7 +39,7 @@ ELSEIF(LINUX)
 ENDIF()
 
 OPTION(USE_SDL2 "Use SDL2 instead of SDL1.2" ON)
-OPTION(HPL2_USE_FBX "Enable FBX mesh loader support (requires Autodesk FBX SDK 2012)" OFF)
+OPTION(HPL2_USE_FBX "Enable FBX mesh loader support (requires Autodesk FBX SDK 2012.2)" OFF)
 
 add_subdirectory(../dependencies/OALWrapper OALWrapper)
 

@@ -75,7 +75,7 @@ namespace hpl {
 			}
 		}
 
-		Error("No cached mesh '%s' found for glTF asset '%s'. Generate .msh/.anm data before loading glTF files.",
+		Error("No cached mesh '%s' found for glTF asset '%s'. Generate .msh data before loading glTF mesh files.",
 			cString::To8Char(sMSHFile).c_str(), cString::To8Char(asFile).c_str());
 		return NULL;
 	}
