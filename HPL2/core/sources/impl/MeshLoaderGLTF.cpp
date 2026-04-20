@@ -64,6 +64,7 @@ namespace hpl {
 		cDate currentDate = cPlatform::FileModifiedDate(asFile);
 		cDate mshDate = cPlatform::FileModifiedDate(sMSHFile);
 
+		// Keep cache semantics aligned with Collada/FBX importers: use pre-generated cache when newer.
 		if(cResources::GetForceCacheLoadingAndSkipSaving() ||
 			mshDate > currentDate || cPlatform::FileExists(asFile)==false)
 		{
@@ -95,6 +96,7 @@ namespace hpl {
 		cDate currentDate = cPlatform::FileModifiedDate(asFile);
 		cDate anmDate = cPlatform::FileModifiedDate(sANMFile);
 
+		// Keep cache semantics aligned with Collada/FBX importers: use pre-generated cache when newer.
 		if(cResources::GetForceCacheLoadingAndSkipSaving() ||
 			anmDate > currentDate || cPlatform::FileExists(asFile)==false)
 		{
